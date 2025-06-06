@@ -2,75 +2,226 @@
   "intents": [
     {
       "tag": "greeting",
-      "patterns": ["Hi", "Hello", "Hey", "Good morning", "Good evening"],
-      "responses": ["Hi there! Welcome to our website. How can I assist you today?"]
+      "patterns": ["Hi", "Hello", "Hey", "Good morning", "Good evening", "What's up", "Howdy", "Greetings", "Hey there", "Hiya"],
+      "responses": [
+        "Hi there! Welcome to our website. How can I assist you today?",
+        "Hello! How can I help you today?",
+        "Hey! What brings you here today?",
+        "Good to see you! What can I do for you?",
+        "Welcome! Let me know how I can support you.",
+        "Hi! Looking for something in particular?"
+      ]
     },
     {
       "tag": "about_site",
-      "patterns": ["What is this site about?", "What do you do here?", "Tell me about your site", "What's your purpose?"],
-      "responses": ["This website showcases our work and services in web design, branding, and software development."]
+      "patterns": [
+        "What is this site about?",
+        "What do you do here?",
+        "Tell me about your site",
+        "What's your purpose?",
+        "What is Ember Designs?",
+        "What can I learn here?",
+        "Is this a portfolio site?",
+        "What's this website for?"
+      ],
+      "responses": [
+        "This website showcases our work and services in web design, branding, and software development.",
+        "We built this site to highlight our creative projects and the digital solutions we provide to startups, companies, and small businesses.",
+        "It’s a portfolio and service hub for Ember Designs — where technology meets creativity.",
+        "Here, you’ll find examples of our past work, details on the services we offer, and how we can help bring your digital ideas to life.",
+        "This site gives you a window into our design and development process, and how we help businesses build their digital presence.",
+        "We created this site to share our creative approach and help businesses understand how we can work together."
+      ]
     },
     {
       "tag": "services",
-      "patterns": ["What services do you offer?", "Can you tell me about your services?", "What can I get here?", "Do you build websites?"],
+      "patterns": [
+        "What services do you offer?",
+        "Can you tell me about your services?",
+        "What can I get here?",
+        "Do you build websites?",
+        "Do you offer branding?",
+        "What do you specialise in?",
+        "What kind of projects do you take on?",
+        "Can you design an app?",
+        "Do you offer full-stack development?"
+      ],
       "responses": [
         "We offer web design, app development, branding, and software solutions for startups and businesses.",
-        "Our services include branding, UX/UI design, website development, and full-stack app development."
+        "Our services include branding, UX/UI design, website development, and full-stack app development.",
+        "We offer end-to-end digital product development: from strategy and design to development and deployment.",
+        "Ember Designs offers creative and technical services including brand identity design, responsive websites, and custom web or mobile apps.",
+        "We build user-friendly, scalable digital products tailored to your business goals.",
+        "Whether you need a rebrand, a new website, or a custom app, we can help."
       ]
     },
     {
       "tag": "portfolio",
-      "patterns": ["Do you have a portfolio?", "Can I see your work?", "Show me your past projects", "What have you worked on?"],
-      "responses": ["Absolutely! You can view our portfolio on the 'Work' page to explore recent projects and case studies."]
+      "patterns": [
+        "Do you have a portfolio?",
+        "Can I see your work?",
+        "Show me your past projects",
+        "What have you worked on?",
+        "Where can I find examples of your work?",
+        "Do you have case studies?",
+        "What kind of projects have you completed?",
+        "Can I view your project gallery?"
+      ],
+      "responses": [
+        "Absolutely! You can view our portfolio on the 'Work' page to explore recent projects and case studies.",
+        "Of course! Just head over to our Work page to see what we've been creating.",
+        "Definitely — we love sharing what we do! Visit our portfolio to see some of our latest work.",
+        "Yes, we maintain a curated selection of our client work and case studies on the site. You’ll find them under the Work section.",
+        "We have a full portfolio available. Just navigate to the Work page to see examples of what we do.",
+        "You can explore our featured projects and success stories on the Work page right here on the site."
+      ]
     },
     {
       "tag": "pricing",
-      "patterns": ["How much do your services cost?", "What are your prices?", "Do you have a pricing page?", "What’s the price range?"],
-      "responses": ["We offer custom pricing based on your project. Visit our Pricing page or contact us for a tailored quote."]
+      "patterns": [
+        "How much do your services cost?",
+        "What are your prices?",
+        "Do you have a pricing page?",
+        "What’s the price range?",
+        "Is there a pricing guide?",
+        "Can I get a quote?",
+        "What’s your rate?"
+      ],
+      "responses": [
+        "We offer custom pricing based on your project. Visit our Pricing page or contact us for a tailored quote.",
+        "Prices vary depending on the scope and complexity of your project — feel free to reach out for a personalized estimate.",
+        "We don’t use fixed rates — every project is unique! Visit our Pricing page or drop us a message to learn more.",
+        "We provide competitive and flexible pricing options to suit your goals and budget."
+      ]
     },
     {
       "tag": "contact",
-      "patterns": ["How can I contact you?", "I want to get in touch", "What's your email?", "Where is your contact form?"],
-      "responses": ["You can reach us through our contact form or email us at contact@emberdesigns.com."]
+      "patterns": [
+        "How can I contact you?",
+        "I want to get in touch",
+        "What's your email?",
+        "Where is your contact form?",
+        "How do I reach you?",
+        "Can I send you a message?",
+        "Do you have a contact page?"
+      ],
+      "responses": [
+        "You can reach us through our contact form or email us at contact@emberdesigns.com.",
+        "Feel free to use the contact form on our site or email us directly — we're happy to hear from you.",
+        "Visit the Contact page to get in touch, book a call, or send a message.",
+        "We're just a message away — check out our contact options on the Contact page."
+      ]
     },
     {
       "tag": "location",
-      "patterns": ["Where are you based?", "What's your location?", "Where is your office?", "Are you in London?"],
-      "responses": ["We're a remote-first company based in the UK, but we work with clients worldwide."]
+      "patterns": [
+        "Where are you based?",
+        "What's your location?",
+        "Where is your office?",
+        "Are you in London?",
+        "Where do you work from?",
+        "What country are you located in?"
+      ],
+      "responses": [
+        "We're a remote-first company based in the UK, but we work with clients worldwide.",
+        "Our team operates remotely across the UK and beyond, allowing us to collaborate globally.",
+        "We’re based in the UK, but most of our projects come from all over the world.",
+        "While we’re UK-based, we’re proud to serve clients internationally."
+      ]
     },
     {
       "tag": "booking",
-      "patterns": ["Can I schedule a meeting?", "How do I book a call?", "I want to talk to someone", "Arrange a consultation"],
-      "responses": ["Of course! You can schedule a free consultation call via our Contact page."]
+      "patterns": [
+        "Can I schedule a meeting?",
+        "How do I book a call?",
+        "I want to talk to someone",
+        "Arrange a consultation",
+        "Book a discovery session",
+        "Can I set up a chat?",
+        "Do you offer consultations?"
+      ],
+      "responses": [
+        "Of course! You can schedule a free consultation call via our Contact page.",
+        "We’d be happy to chat — just visit our Contact page to book a session.",
+        "To arrange a consultation or chat, head over to the Contact page and pick a time that works for you.",
+        "Yes! We offer free consultations. Check our Contact page to schedule a call."
+      ]
     },
     {
       "tag": "technologies",
-      "patterns": ["What technologies do you use?", "Do you use React?", "What stack do you work with?", "What tools do you use?"],
-      "responses": ["We use modern technologies including React, Next.js, Node.js, Figma, and more depending on your needs."]
+      "patterns": [
+        "What technologies do you use?",
+        "Do you use React?",
+        "What stack do you work with?",
+        "What tools do you use?",
+        "Do you use Figma?",
+        "Do you build with Node?",
+        "What frameworks do you use?"
+      ],
+      "responses": [
+        "We use modern technologies including React, Next.js, Node.js, Figma, and more depending on your needs.",
+        "Our stack includes technologies like React, TypeScript, Node.js, and tools like Figma and GitHub.",
+        "Yes! We use tools such as React, Next.js, Tailwind, Express, and design tools like Figma and Adobe XD.",
+        "It depends on the project, but we work with a full modern development and design stack."
+      ]
     },
     {
       "tag": "faq",
-      "patterns": ["What’s your turnaround time?", "Do you work with startups?", "Can you do rebranding?", "Do you offer support?"],
+      "patterns": [
+        "What’s your turnaround time?",
+        "Do you work with startups?",
+        "Can you do rebranding?",
+        "Do you offer support?",
+        "Do you provide maintenance?",
+        "Can you redesign my website?",
+        "Do you help after launch?",
+        "How long does a project take?"
+      ],
       "responses": [
         "Yes, we work with startups and small businesses, and offer full support post-launch.",
         "Turnaround time depends on project scope, but we typically deliver websites within 3–5 weeks.",
-        "We also offer complete rebranding and refresh services."
+        "We also offer complete rebranding and refresh services.",
+        "Post-launch, we provide maintenance, updates, and support based on your needs.",
+        "We’re happy to redesign or improve existing websites too."
       ]
     },
     {
       "tag": "navigation",
-      "patterns": ["Where is your blog?", "Take me to the services page", "How do I find your portfolio?", "Go to the contact page"],
-      "responses": ["Please use the navigation bar above or [click here](#) to go directly to that section."]
+      "patterns": [
+        "Where is your blog?",
+        "Take me to the services page",
+        "How do I find your portfolio?",
+        "Go to the contact page",
+        "Where’s the pricing info?",
+        "How do I book a call?",
+        "Where can I learn more?"
+      ],
+      "responses": [
+        "Please use the navigation bar above or [click here](#) to go directly to that section.",
+        "You can find everything you need in the site menu — just click on the section you're looking for.",
+        "Feel free to explore using the navigation bar or go to the footer for quick links.",
+        "All our sections are linked in the main navigation — look for Services, Work, Contact, or Pricing there."
+      ]
     },
     {
       "tag": "goodbye",
-      "patterns": ["Bye", "Goodbye", "See you later", "Talk soon", "Thanks!"],
-      "responses": ["Thanks for visiting! Let us know if you need anything else."]
+      "patterns": ["Bye", "Goodbye", "See you later", "Talk soon", "Thanks!", "Catch you later", "Take care"],
+      "responses": [
+        "Thanks for visiting! Let us know if you need anything else.",
+        "It was great chatting with you — come back anytime!",
+        "Goodbye! Wishing you all the best with your project.",
+        "Thanks! Feel free to reach out again if you need help."
+      ]
     },
     {
       "tag": "unknown",
       "patterns": [],
-      "responses": ["I'm not sure how to help with that. Can you rephrase or ask something about our website or services?"]
+      "responses": [
+        "I'm not sure how to help with that. Can you rephrase or ask something about our website or services?",
+        "Sorry, I didn’t catch that — could you ask in a different way?",
+        "I’m here to help with questions about our work, services, or website. Could you clarify?",
+        "Hmm, I’m not quite sure what you mean. Try asking about our work, services, or booking a consultation."
+      ]
     }
   ]
 }

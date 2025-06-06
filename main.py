@@ -201,9 +201,10 @@ def generate_response(user_input):
         noun_comparison = len(set(nouns) & set(pattern_info["pattern_nouns"]))
         verb_comparison = len(set(nouns) & set(pattern_info["pattern_verbs"]))
         total_score = noun_comparison + verb_comparison
+
+        # FOR DEBUGGING
         print("user nouns: ", set(nouns))
         print("pattern nouns: ", set(pattern_info["pattern_nouns"]))
-        
         # print("total score ", total_score)
         # print("best score ", best_score)
         
