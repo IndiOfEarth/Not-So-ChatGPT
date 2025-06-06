@@ -1,0 +1,76 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["Hi", "Hello", "Hey", "Good morning", "Good evening"],
+      "responses": ["Hi there! Welcome to our website. How can I assist you today?"]
+    },
+    {
+      "tag": "about_site",
+      "patterns": ["What is this site about?", "What do you do here?", "Tell me about your site", "What's your purpose?"],
+      "responses": ["This website showcases our work and services in web design, branding, and software development."]
+    },
+    {
+      "tag": "services",
+      "patterns": ["What services do you offer?", "Can you tell me about your services?", "What can I get here?", "Do you build websites?"],
+      "responses": [
+        "We offer web design, app development, branding, and software solutions for startups and businesses.",
+        "Our services include branding, UX/UI design, website development, and full-stack app development."
+      ]
+    },
+    {
+      "tag": "portfolio",
+      "patterns": ["Do you have a portfolio?", "Can I see your work?", "Show me your past projects", "What have you worked on?"],
+      "responses": ["Absolutely! You can view our portfolio on the 'Work' page to explore recent projects and case studies."]
+    },
+    {
+      "tag": "pricing",
+      "patterns": ["How much do your services cost?", "What are your prices?", "Do you have a pricing page?", "What’s the price range?"],
+      "responses": ["We offer custom pricing based on your project. Visit our Pricing page or contact us for a tailored quote."]
+    },
+    {
+      "tag": "contact",
+      "patterns": ["How can I contact you?", "I want to get in touch", "What's your email?", "Where is your contact form?"],
+      "responses": ["You can reach us through our contact form or email us at contact@emberdesigns.com."]
+    },
+    {
+      "tag": "location",
+      "patterns": ["Where are you based?", "What's your location?", "Where is your office?", "Are you in London?"],
+      "responses": ["We're a remote-first company based in the UK, but we work with clients worldwide."]
+    },
+    {
+      "tag": "booking",
+      "patterns": ["Can I schedule a meeting?", "How do I book a call?", "I want to talk to someone", "Arrange a consultation"],
+      "responses": ["Of course! You can schedule a free consultation call via our Contact page."]
+    },
+    {
+      "tag": "technologies",
+      "patterns": ["What technologies do you use?", "Do you use React?", "What stack do you work with?", "What tools do you use?"],
+      "responses": ["We use modern technologies including React, Next.js, Node.js, Figma, and more depending on your needs."]
+    },
+    {
+      "tag": "faq",
+      "patterns": ["What’s your turnaround time?", "Do you work with startups?", "Can you do rebranding?", "Do you offer support?"],
+      "responses": [
+        "Yes, we work with startups and small businesses, and offer full support post-launch.",
+        "Turnaround time depends on project scope, but we typically deliver websites within 3–5 weeks.",
+        "We also offer complete rebranding and refresh services."
+      ]
+    },
+    {
+      "tag": "navigation",
+      "patterns": ["Where is your blog?", "Take me to the services page", "How do I find your portfolio?", "Go to the contact page"],
+      "responses": ["Please use the navigation bar above or [click here](#) to go directly to that section."]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "Goodbye", "See you later", "Talk soon", "Thanks!"],
+      "responses": ["Thanks for visiting! Let us know if you need anything else."]
+    },
+    {
+      "tag": "unknown",
+      "patterns": [],
+      "responses": ["I'm not sure how to help with that. Can you rephrase or ask something about our website or services?"]
+    }
+  ]
+}
