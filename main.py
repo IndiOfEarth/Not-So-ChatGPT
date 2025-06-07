@@ -263,20 +263,39 @@ class IntentLoader:
 class Preprocessor:
     # Constructor
     def __init__(self):
-        return
+        # Download necessary NLTK resources 
+        nltk.download('punkt_tab')
+        nltk.download('stopwords')
+        nltk.download('wordnet')
+        nltk.download('omw-1.4')
+        nltk.download('averaged_perceptron_tagger_eng')
+        self.stop_words = set(stopwords.words('english')) # stores stop words
+        self.lemmatizer = WordNetLemmatizer() # using the nltk lemmatizer
 
     # Cleans the text
     # Removes punctuation, tokenises the input, removes stopwords
     def clean_text(self, text):
-        return
+        # make all the text lower case
+        # remove punctuation and use String.translate() method and .maketrans() method (mapping table)
+        text = text.lower().translate(str.maketrans('', '', string.punctuation))
+        tokens = nltk.word_tokenize(text) # tokenises the text
+        tokens = [word for word in tokens if word not in self.stop_words] # removes all stopwords that match from the set
+
 
     # Gets the pos tags from the tokens provided (by user input)
     def get_pos_tags(self, tokens):
-        return
+        tagged = nltk.pos_tag(tokens)
+        return [(self.lemmatize_by_pos(word, tag), tag) for word,tag in tagged]
     
     # Lemmatize the pos tagged words (nouns and verbs)
     def lemmatize_by_pos(self, word, tag):
-        return
+        # checks if tag is a noun tag
+        if tag.startswith('NN'):
+            return self.lemmatizer.lemmatize(word, pos='n')
+        # checks if tag is a verb tag
+        elif tag.startswith('VB'):
+            return self.lemmatizer.lemmatize(word, pos='v')
+        return word
     
 
 # Handles the intent matching via regex and POS comparison
