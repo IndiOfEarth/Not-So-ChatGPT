@@ -282,10 +282,32 @@ class Preprocessor:
         tokens = [word for word in tokens if word not in self.stop_words] # removes all stopwords that match from the set
         return tokens
 
+    # map the NLTK tags (NN, VB, etc.) to WordNet POS tag
+    def get_wordnet_pos(self, tag):
+        if tag.startswith('J'):
+            return wordnet.ADJ
+        elif tag.startswith('V'):
+            return wordnet.VERB
+        elif tag.startswith('N'):
+            return wordnet.NOUN
+        elif tag.startswith('R'):
+            return wordnet.ADV
+        else:
+            return None
+
     # Gets the pos tags from the tokens provided (by user input)
     def get_pos_tags(self, tokens):
-        tagged = nltk.pos_tag(tokens)
-        return [(self.lemmatize_by_pos(word, tag), tag) for word,tag in tagged]
+        tagged = nltk.pos_tag(tokens) # performs pos tagging
+        lemmatized = [] # stores all lemmatized words
+        for word, tag in tagged:
+            wn_tag = self.get_wordnet_pos(tag)
+            if wn_tag:
+                lemma = self.lemmatizer.lemmatize(word, pos=wn_tag)
+            else:
+                lemma = word
+            lemmatized.append((lemma, tag))
+        return lemmatized
+        # return [(self.lemmatize_by_pos(word, tag), tag) for word,tag in tagged]
     
     # Lemmatize the pos tagged words (nouns and verbs)
     def lemmatize_by_pos(self, word, tag):
@@ -313,19 +335,21 @@ class PatternMatcher:
         pattern_data = []
         for pattern, intent in self.rgx2int.items():
             phrases = pattern.split('|')
-            all_tokens, all_nouns, all_verbs = [], [], []
+            all_tokens, all_nouns, all_verbs, all_adjs = [], [], [], []
             for phrase in phrases:
                 tokens = self.preprocessor.clean_text(phrase)
                 tagged = self.preprocessor.get_pos_tags(tokens)
                 all_tokens.extend(tokens)
                 all_nouns.extend([w for w, t in tagged if t.startswith('NN')])
                 all_verbs.extend([w for w, t in tagged if t.startswith('VB')])
+                all_adjs.extend([w for w, t in tagged if t.startswith('JJ')])
             pattern_data.append({
                 "regex": pattern,
                 "intent": intent,
                 "pattern_tokens": list(set(all_tokens)),
                 "pattern_nouns": list(set(all_nouns)),
-                "pattern_verbs": list(set(all_verbs))
+                "pattern_verbs": list(set(all_verbs)),
+                "pattern_adjs": list(set(all_adjs))
             })
         return pattern_data 
     
@@ -333,27 +357,33 @@ class PatternMatcher:
     def match(self, user_input):
         tokens = self.preprocessor.clean_text(user_input)
         tagged = self.preprocessor.get_pos_tags(tokens)
+
+        # gets all the nouns, verbs andd adjectives from user input
         user_nouns = [w for w, t in tagged if t.startswith('NN')]
         user_verbs = [w for w, t in tagged if t.startswith('VB')]
+        user_adjs = [w for w, t in tagged if t.startswith('JJ')]
 
         best_intent, best_score = "unknown", 0
+
         for p in self.pattern_data:
             noun_match = len(set(user_nouns) & set(p["pattern_nouns"]))
             verb_match = len(set(user_verbs) & set(p["pattern_verbs"]))
-            score = noun_match + verb_match
+            adj_match = len(set(user_adjs) & set(p.get("pattern_adjs", [])))
+
+            score = noun_match + (verb_match * 3) + (adj_match * 2)
 
             if score > best_score:
                 best_intent, best_score = p["intent"], score
         
-        if best_score > 0:
-            return best_intent, user_nouns, user_verbs
+        if best_score != "unknown":
+            return best_intent, user_nouns, user_verbs, user_adjs
         
         # Fallback to regex
         for pattern, intent in self.rgx2int.items():
             if re.search(pattern, user_input, re.IGNORECASE):
-                return intent, user_nouns, user_verbs
+                return intent, user_nouns, user_verbs, user_adjs
 
-        return "unknown", user_nouns, user_verbs
+        return "unknown", user_nouns, user_verbs, user_adjs
 
 # Main class that ties everything together and runs the loop
 class Chatbot:
@@ -367,13 +397,15 @@ class Chatbot:
     # Generates a response that will be returned based on user_input
     # Will look through tags, nouns, verbs
     def generate_response(self, user_input):
-        tag, nouns, verbs = self.matcher.match(user_input) # gets the intent, nouns, and verbs
+        tag, nouns, verbs, adjs = self.matcher.match(user_input) # gets the intent, nouns, and verbs
         if tag in self.responses:
             response = random.choice(self.responses[tag])
             if nouns:
                 response += f" I noticed you mentioned {', '.join(nouns)}."
             if verbs:
                 response += f" Are you looking to {', '.join(verbs)} it?"
+            if adjs:
+                response += f" It's great you described things as: {', '.join(adjs)}."
         else:
             response = "I'm not quite sure I understood. Could you rephrase that?"
         return response
