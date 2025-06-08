@@ -5,7 +5,7 @@ import random
 import pandas as pd
 import nltk
 import string
-from nltk.corpus import stopwords
+from nltk.corpus import stopwords, wordnet
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 chat_memory = []
 
@@ -282,7 +282,6 @@ class Preprocessor:
         tokens = [word for word in tokens if word not in self.stop_words] # removes all stopwords that match from the set
         return tokens
 
-
     # Gets the pos tags from the tokens provided (by user input)
     def get_pos_tags(self, tokens):
         tagged = nltk.pos_tag(tokens)
@@ -346,9 +345,10 @@ class PatternMatcher:
             if score > best_score:
                 best_intent, best_score = p["intent"], score
         
-        if best_intent > 0:
+        if best_score > 0:
             return best_intent, user_nouns, user_verbs
         
+        # Fallback to regex
         for pattern, intent in self.rgx2int.items():
             if re.search(pattern, user_input, re.IGNORECASE):
                 return intent, user_nouns, user_verbs

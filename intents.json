@@ -138,13 +138,15 @@
         "Arrange a consultation",
         "Book a discovery session",
         "Can I set up a chat?",
-        "Do you offer consultations?"
+        "Do you offer consultations?",
+        "I want to book"
       ],
       "responses": [
         "Of course! You can schedule a free consultation call via our Contact page.",
         "We’d be happy to chat — just visit our Contact page to book a session.",
         "To arrange a consultation or chat, head over to the Contact page and pick a time that works for you.",
-        "Yes! We offer free consultations. Check our Contact page to schedule a call."
+        "Yes! We offer free consultations. Check our Contact page to schedule a call.",
+        "Sure, I can help you book a session."
       ]
     },
     {
