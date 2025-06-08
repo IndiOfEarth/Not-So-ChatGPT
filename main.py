@@ -346,7 +346,7 @@ class PatternMatcher:
             if score > best_score:
                 best_intent, best_score = p["intent"], score
         
-        if best_intent != "unknown":
+        if best_intent > 0:
             return best_intent, user_nouns, user_verbs
         
         for pattern, intent in self.rgx2int.items():
@@ -375,7 +375,7 @@ class Chatbot:
             if verbs:
                 response += f" Are you looking to {', '.join(verbs)} it?"
         else:
-            response = "Sorry, I don't understand."
+            response = "I'm not quite sure I understood. Could you rephrase that?"
         return response
     
     # Performs the main chat loop
