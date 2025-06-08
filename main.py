@@ -280,6 +280,7 @@ class Preprocessor:
         text = text.lower().translate(str.maketrans('', '', string.punctuation))
         tokens = nltk.word_tokenize(text) # tokenises the text
         tokens = [word for word in tokens if word not in self.stop_words] # removes all stopwords that match from the set
+        return tokens
 
 
     # Gets the pos tags from the tokens provided (by user input)
@@ -332,14 +333,14 @@ class PatternMatcher:
     # Performs matching logic for pattern data and user input
     def match(self, user_input):
         tokens = self.preprocessor.clean_text(user_input)
-        tagged = self.preprocessor.get_pos_tags(token)
+        tagged = self.preprocessor.get_pos_tags(tokens)
         user_nouns = [w for w, t in tagged if t.startswith('NN')]
         user_verbs = [w for w, t in tagged if t.startswith('VB')]
 
         best_intent, best_score = "unknown", 0
         for p in self.pattern_data:
             noun_match = len(set(user_nouns) & set(p["pattern_nouns"]))
-            verb_match = len(set(user_nouns) & set(p["pattern_verbs"]))
+            verb_match = len(set(user_verbs) & set(p["pattern_verbs"]))
             score = noun_match + verb_match
 
             if score > best_score:
@@ -357,17 +358,37 @@ class PatternMatcher:
 # Main class that ties everything together and runs the loop
 class Chatbot:
     # Constructor
-    def __init__(self):
-        return
+    def __init__(self, intents_path="./intents.json"):
+        self.loader = IntentLoader(intents_path) # creates an instance of the intent loader
+        self.preprocessor = Preprocessor() # creates the preprocessor object
+        self.matcher = PatternMatcher(self.loader.rgx2int, self.preprocessor) # creates the pattern matcher
+        self.responses = self.loader.int2res # creates the responses
     
     # Generates a response that will be returned based on user_input
     # Will look through tags, nouns, verbs
     def generate_response(self, user_input):
-        return
+        tag, nouns, verbs = self.matcher.match(user_input) # gets the intent, nouns, and verbs
+        if tag in self.responses:
+            response = random.choice(self.responses[tag])
+            if nouns:
+                response += f" I noticed you mentioned {', '.join(nouns)}."
+            if verbs:
+                response += f" Are you looking to {', '.join(verbs)} it?"
+        else:
+            response = "Sorry, I don't understand."
+        return response
     
     # Performs the main chat loop
     def chat_loop(self):
-        return
-   # Performs eternal smoosh
-    def smoosh_forever(self, with_baby_girl):
-        return
+        print("Chatbot: Hello! How can I help you today?")
+        print("Chatbot: Say 'bye' anytime to exit!")
+        while True:
+            user_input = input("You: ")
+            if user_input.lower() == "bye":
+                print("Chatbot: Thank you for your interaction.")
+                break
+            print("Chatbot:", self.generate_response(user_input))
+    
+
+bot = Chatbot()
+bot.chat_loop()
