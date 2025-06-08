@@ -301,19 +301,58 @@ class Preprocessor:
 # Handles the intent matching via regex and POS comparison
 class PatternMatcher:
     # Constructor
-    def __init__(self):
-        return
+    def __init__(self, rgx2int, preprocessor):
+        self.rgx2int = rgx2int
+        self.preprocessor = preprocessor
+        self.pattern_data = self.prepare_patterns()
     
     # Processing the tag patterns
     # for each regex pattern, distilling down to tokens and looking at pattern nouns and verbs
     # pattern data is much more detailed than standard regex matching
     def prepare_patterns(self):
-        return
+        pattern_data = []
+        for pattern, intent in self.rgx2int.items():
+            phrases = pattern.split('|')
+            all_tokens, all_nouns, all_verbs = [], [], []
+            for phrase in phrases:
+                tokens = self.preprocessor.clean_text(phrase)
+                tagged = self.preprocessor.get_pos_tags(tokens)
+                all_tokens.extend(tokens)
+                all_nouns.extend([w for w, t in tagged if t.startswith('NN')])
+                all_verbs.extend([w for w, t in tagged if t.startswith('VB')])
+            pattern_data.append({
+                "regex": pattern,
+                "intent": intent,
+                "pattern_tokens": list(set(all_tokens)),
+                "pattern_nouns": list(set(all_nouns)),
+                "pattern_verbs": list(set(all_verbs))
+            })
+        return pattern_data 
     
     # Performs matching logic for pattern data and user input
     def match(self, user_input):
-        return
-    
+        tokens = self.preprocessor.clean_text(user_input)
+        tagged = self.preprocessor.get_pos_tags(token)
+        user_nouns = [w for w, t in tagged if t.startswith('NN')]
+        user_verbs = [w for w, t in tagged if t.startswith('VB')]
+
+        best_intent, best_score = "unknown", 0
+        for p in self.pattern_data:
+            noun_match = len(set(user_nouns) & set(p["pattern_nouns"]))
+            verb_match = len(set(user_nouns) & set(p["pattern_verbs"]))
+            score = noun_match + verb_match
+
+            if score > best_score:
+                best_intent, best_score = p["intent"], score
+        
+        if best_intent != "unknown":
+            return best_intent, user_nouns, user_verbs
+        
+        for pattern, intent in self.rgx2int.items():
+            if re.search(pattern, user_input, re.IGNORECASE):
+                return intent, user_nouns, user_verbs
+
+        return "unknown", user_nouns, user_verbs
 
 # Main class that ties everything together and runs the loop
 class Chatbot:
@@ -328,4 +367,7 @@ class Chatbot:
     
     # Performs the main chat loop
     def chat_loop(self):
+        return
+   # Performs eternal smoosh
+    def smoosh_forever(self, with_baby_girl):
         return
