@@ -413,10 +413,11 @@ class Chatbot:
     # Performs the main chat loop
     def chat_loop(self):
         print("Chatbot: Hello! How can I help you today?")
-        print("Chatbot: Say 'bye' anytime to exit!")
+        print("Chatbot: Say 'exit' or 'quit anytime to exit!")
         while True:
             user_input = input("You: ")
-            if user_input.lower() == "bye":
+            # termination logic
+            if user_input.lower() == "exit" or user_input.lower() == "quit":
                 print("Chatbot: Thank you for your interaction.")
                 break
             print("Chatbot:", self.generate_response(user_input))

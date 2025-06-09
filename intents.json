@@ -2,7 +2,21 @@
   "intents": [
     {
       "tag": "greeting",
-      "patterns": ["Hi", "Hello", "Hey", "Good morning", "Good evening", "What's up", "Howdy", "Greetings", "Hey there", "Hiya"],
+      "patterns": ["Hi", 
+                   "Hello", 
+                   "Hey", 
+                   "Good morning", 
+                   "Good evening", 
+                   "What's up", 
+                   "Howdy", 
+                   "Greetings", 
+                   "Hey there", 
+                   "Hiya",
+                   "he+y",
+                   "hi( there)?",
+                   "h[ae]llo",
+                   "good (morning|afternoon|evening)"
+                  ],
       "responses": [
         "Hi there! Welcome to our website. How can I assist you today?",
         "Hello! How can I help you today?",
@@ -11,6 +25,15 @@
         "Welcome! Let me know how I can support you.",
         "Hi! Looking for something in particular?"
       ]
+    },
+    {
+      "tag": "store_name",
+      "patterns": [
+        "my name is (?P<name>\\w+",
+        "I am (?P<name>\\w+)",
+        "you can call me (?P<name>\\w+)"
+      ],
+      "responses": ["Nice to meet you, {name}!"]
     },
     {
       "tag": "about_site",
