@@ -355,6 +355,7 @@ class PatternMatcher:
     
     # Performs matching logic for pattern data and user input
     def match(self, user_input):
+        print(self.rgx2int)
         tokens = self.preprocessor.clean_text(user_input)
         tagged = self.preprocessor.get_pos_tags(tokens)
 
@@ -401,18 +402,28 @@ class Chatbot:
     # Will look through tags, nouns, verbs
     def generate_response(self, user_input):
 
-        # Memory Capture
+        # Memory Capture Function called before self.matcher.match() below
+        # for each pattern in self.rgx2int
+        # check for regex pattern matches as usual
+        # if a memory key and a group exist for that particular rule in rgx2int,
+        # store memory if needed and return necessary tag(intent), nouns, verbs, adjectives
+        # if can't find any matching from memory, then just fill without or use placeholders
+        
         # Example 1: Capture name
         name_match = re.search(r"\bmy name is (\w+)", user_input, re.IGNORECASE)
         if name_match:
+            # captures group 1 - which is the name specified by user
             self.memory["name"] = name_match.group(1).capitalize()
             return f"Nice to meet you, {self.memory['name']}!"
 
         # Example 2: Capture favorite color
         color_match = re.search(r"\bmy (favourite|favorite) colour is (\w+)", user_input, re.IGNORECASE)
         if color_match:
+            # captures group 2 - which is the favourite colour specified by user
             self.memory["color"] = color_match.group(2).capitalize()
             return f"{self.memory['color']} is a beautiful color!"
+        
+        #-------------------------------------------------------------------------------------------------
 
         tag, nouns, verbs, adjs = self.matcher.match(user_input) # gets the intent, nouns, and verbs
         if tag in self.responses:
