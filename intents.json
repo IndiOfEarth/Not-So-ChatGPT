@@ -18,22 +18,9 @@
                    "good (morning|afternoon|evening)"
                   ],
       "responses": [
-        "Hi there! Welcome to our website. How can I assist you today?",
-        "Hello! How can I help you today?",
-        "Hey! What brings you here today?",
-        "Good to see you! What can I do for you?",
-        "Welcome! Let me know how I can support you.",
-        "Hi! Looking for something in particular?"
+        "Hello {name}! How can I help you today?", 
+        "Hey there, {name}!"
       ]
-    },
-    {
-      "tag": "store_name",
-      "patterns": [
-        "my name is (?P<name>\\w+",
-        "I am (?P<name>\\w+)",
-        "you can call me (?P<name>\\w+)"
-      ],
-      "responses": ["Nice to meet you, {name}!"]
     },
     {
       "tag": "about_site",

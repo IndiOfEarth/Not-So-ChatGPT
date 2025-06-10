@@ -380,8 +380,10 @@ class PatternMatcher:
         
         # Fallback to regex
         for pattern, intent in self.rgx2int.items():
-            if re.search(pattern, user_input, re.IGNORECASE):
+            match = re.search(pattern, user_input, re.IGNORECASE)
+            if match:
                 return intent, user_nouns, user_verbs, user_adjs
+
 
         return "unknown", user_nouns, user_verbs, user_adjs
 
@@ -393,13 +395,33 @@ class Chatbot:
         self.preprocessor = Preprocessor() # creates the preprocessor object
         self.matcher = PatternMatcher(self.loader.rgx2int, self.preprocessor) # creates the pattern matcher
         self.responses = self.loader.int2res # creates the responses
-    
+        self.memory = {} # creates a memory store (of key-value pairs)
+
     # Generates a response that will be returned based on user_input
     # Will look through tags, nouns, verbs
     def generate_response(self, user_input):
+
+        # Memory Capture
+        # Example 1: Capture name
+        name_match = re.search(r"\bmy name is (\w+)", user_input, re.IGNORECASE)
+        if name_match:
+            self.memory["name"] = name_match.group(1).capitalize()
+            return f"Nice to meet you, {self.memory['name']}!"
+
+        # Example 2: Capture favorite color
+        color_match = re.search(r"\bmy (favourite|favorite) colour is (\w+)", user_input, re.IGNORECASE)
+        if color_match:
+            self.memory["color"] = color_match.group(2).capitalize()
+            return f"{self.memory['color']} is a beautiful color!"
+
         tag, nouns, verbs, adjs = self.matcher.match(user_input) # gets the intent, nouns, and verbs
         if tag in self.responses:
             response = random.choice(self.responses[tag])
+            
+             # Substitute placeholders in response
+            response = response.replace("{name}", self.memory.get("name", "friend"))
+            response = response.replace("{color}", self.memory.get("color", "color"))
+
             if nouns:
                 response += f" I noticed you mentioned {', '.join(nouns)}."
             if verbs:
