@@ -18,9 +18,29 @@
                    "good (morning|afternoon|evening)"
                   ],
       "responses": [
-        "Hello {name}! How can I help you today?", 
-        "Hey there, {name}!"
+        "Hi there! Welcome to our website. How can I assist you today?",
+        "Hello! How can I help you today?",
+        "Hey! What brings you here today?",
+        "Good to see you! What can I do for you?",
+        "Welcome! Let me know how I can support you.",
+        "Hi! Looking for something in particular?"
       ]
+    },
+    {
+      "tag": "store_name",
+      "patterns": [
+        "my name is (\\w+)",
+        "i am (\\w+)"
+      ],
+      "responses": ["Nice to meet you, {name}!"]
+    },
+    {
+      "tag": "store_color",
+      "patterns": [
+        "my (favourite|favorite) colour is (\\w+)",
+        "i like the color (\\w+)"
+      ],
+      "responses": ["{color} is a beautiful color!"]
     },
     {
       "tag": "about_site",
