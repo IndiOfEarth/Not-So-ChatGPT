@@ -5,6 +5,7 @@ import random
 import pandas as pd
 import nltk
 import string
+import math
 from nltk.corpus import stopwords, wordnet
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 chat_memory = []
@@ -237,7 +238,8 @@ class IntentLoader:
         self.df = self.load_json() # stores the dataframe
         self.rgx2int = self.storePatterns() # rgx2int (precepts with matching intents)
         self.int2res = self.storeResponses() # int2res (intents with matching responses)
-    
+        self.tag2memory = self.storeMemoryCaptures()
+
     # Loads the json file as a pandas dataframe
     def load_json(self):
         # opens the json file
@@ -257,6 +259,14 @@ class IntentLoader:
     # This is the zip() function
     def storeResponses(self):
         return dict(zip(self.df['tag'], self.df['responses']))
+    
+
+    def storeMemoryCaptures(self):
+        tag2memory = {}
+        for _, row in self.df.iterrows():
+            if "memory" in row:
+                tag2memory[row["tag"]] = row["memory"]
+        return tag2memory
 
 
 # Handles tokenisation, stopword removal, lemmatization, and POS tagging
@@ -403,19 +413,32 @@ class Chatbot:
 
         # Memory Capture Function called before self.matcher.match() below
         
-        # Example 1: Capture name
-        name_match = re.search(r"\bmy name is (\w+)", user_input, re.IGNORECASE)
-        if name_match:
-            # captures group 1 - which is the name specified by user
-            self.memory["name"] = name_match.group(1).capitalize()
-            return f"Nice to meet you, {self.memory['name']}!"
+        # # Example 1: Capture name
+        # name_match = re.search(r"\bmy name is (\w+)", user_input, re.IGNORECASE)
+        # if name_match:
+        #     # captures group 1 - which is the name specified by user
+        #     self.memory["name"] = name_match.group(1).capitalize()
+        #     return f"Nice to meet you, {self.memory['name']}!"
 
-        # Example 2: Capture favorite color
-        color_match = re.search(r"\bmy (favourite|favorite) colour is (\w+)", user_input, re.IGNORECASE)
-        if color_match:
-            # captures group 2 - which is the favourite colour specified by user
-            self.memory["color"] = color_match.group(2).capitalize()
-            return f"{self.memory['color']} is a beautiful color!"
+        # # Example 2: Capture favorite color
+        # color_match = re.search(r"\bmy (favourite|favorite) colour is (\w+)", user_input, re.IGNORECASE)
+        # if color_match:
+        #     # captures group 2 - which is the favourite colour specified by user
+        #     self.memory["color"] = color_match.group(2).capitalize()
+        #     return f"{self.memory['color']} is a beautiful color!"
+         # First check for memory-capturing patterns
+        for pattern, tag in self.loader.rgx2int.items():
+            if tag in self.loader.tag2memory:
+                match = re.search(pattern, user_input, re.IGNORECASE)
+                if match:
+                    memory_fields = self.loader.tag2memory[tag]
+                    if not isinstance(memory_fields, float):
+                        for key, group_num in memory_fields.items():
+                            self.memory[key] = match.group(group_num).capitalize()
+                        response = random.choice(self.responses.get(tag, ["Got it!"]))
+                        for key in self.memory:
+                            response = response.replace(f"{{{key}}}", self.memory[key])
+                        return response
         
         tag, nouns, verbs, adjs = self.matcher.match(user_input) # gets the intent, nouns, and verbs            
         

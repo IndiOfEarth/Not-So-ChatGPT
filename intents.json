@@ -27,20 +27,20 @@
       ]
     },
     {
-      "tag": "store_name",
-      "patterns": [
-        "my name is (\\w+)",
-        "i am (\\w+)"
-      ],
-      "responses": ["Nice to meet you, {name}!"]
+      "tag": "capture_name",
+      "patterns": ["my name is (\\w+)"],
+      "responses": ["Nice to meet you, {name}?"],
+      "memory": {
+        "name": 1
+      }
     },
     {
-      "tag": "store_color",
-      "patterns": [
-        "my (favourite|favorite) colour is (\\w+)",
-        "i like the color (\\w+)"
-      ],
-      "responses": ["{color} is a beautiful color!"]
+      "tag": "capture_color",
+      "patterns": ["my (favourite|favorite) colour is (\\w+)"],
+      "responses": ["{color} is a beautiful color!"],
+      "memory": {
+        "color": 2
+      }
     },
     {
       "tag": "about_site",
