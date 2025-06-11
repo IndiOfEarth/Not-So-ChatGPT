@@ -446,8 +446,8 @@ class Chatbot:
             response = random.choice(self.responses[tag])
 
             # Substitute placeholders in response
-            response = response.replace("{name}", self.memory.get("name", "friend"))
-            response = response.replace("{color}", self.memory.get("color", "color"))
+            # response = response.replace("{name}", self.memory.get("name", "friend"))
+            # response = response.replace("{color}", self.memory.get("color", "color"))
 
             if nouns:
                 response += f" I noticed you mentioned {', '.join(nouns)}."

@@ -43,6 +43,66 @@
       }
     },
     {
+      "tag": "capture_project_type",
+      "patterns": [
+        "I need a (website|app|logo|brand|branding|software|ecommerce site|web app)"
+      ],
+      "responses": [
+        "Thanks! We can help with your {project_type}."
+      ],
+      "memory": {
+        "project_type": 1
+      }
+    },
+    {
+      "tag": "capture_technology",
+      "patterns": [
+        "Can you work with (React|Node|Figma|Vue|Flutter|Shopify)?"
+      ],
+      "responses": [
+        "Of course, we can definitely use {technology} for your project."
+      ],
+      "memory": {
+        "technology": 1
+      }
+    },
+    {
+      "tag": "capture_budget",
+      "patterns": [
+        "My budget is (\\$?\\d+(?:k|K)?(?:-\\$?\\d+(?:k|K)?)?)"
+      ],
+      "responses": [
+        "Thanks for letting us know! Your budget of {budget} will help us plan the best solution."
+      ],
+      "memory": {
+        "budget": 1
+      }
+    },
+    {
+      "tag": "capture_timeline",
+      "patterns": [
+        "I’d like it completed before ([a-zA-Z]+ \\d{1,2}(?:,? \\d{4})?)"
+      ],
+      "responses": [
+        "Got it — we'll keep {timeline} in mind as your target date."
+      ],
+      "memory": {
+        "timeline": 1
+      }
+    },
+    {
+      "tag": "capture_business_type",
+      "patterns": [
+        "My business is a (\\w+)"
+      ],
+      "responses": [
+        "Awesome — we love working with {business_type}s!"
+      ],
+      "memory": {
+        "business_type": 1
+      }
+    },
+    {
       "tag": "about_site",
       "patterns": [
         "What is this site about?",
