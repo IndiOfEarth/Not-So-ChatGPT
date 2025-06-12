@@ -24,6 +24,12 @@
         "Good to see you {name}! What can I do for you?",
         "Welcome! Let me know how I can support you.",
         "Hi! Looking for something in particular?"
+      ],
+      "followups": [
+        "Would you like to know about the SERVICES we offer for your {capture_project_type}?",
+        "Would you like to see our PORTFOLIO and if we do anything for your {capture_project_type}?",
+        "Do you want to know where we are LOCATED, {name}?",
+        "Would you like to know more about the TECHNOLOGIES we use for your particular {capture_project_type}?"
       ]
     },
     {
@@ -103,6 +109,18 @@
       }
     },
     {
+      "tag": "capture_location",
+      "patterns": [
+        "I'm located in (\\w+)"
+      ],
+      "responses": [
+        "Awesome — we may be able to work near {location}!"
+      ],
+      "memory": {
+        "location": 1
+      }
+    },
+    {
       "tag": "about_site",
       "patterns": [
         "Tell me about your site",
@@ -121,10 +139,10 @@
         "We created this site to share our creative approach and help businesses understand how we can work together."
       ],
       "followups": [
-        "Would you like to know about the SERVICES we offer?",
-        "Are you wanting to see our PORTFOLIO?",
-        "Do you want to know where we are LOCATED?",
-        "Would you like to know more about the TECHNOLOGIES we use?"
+        "Would you like to know about the SERVICES we offer for your {capture_project_type}?",
+        "Would you like to see our PORTFOLIO and if we do anything for your {capture_project_type}?",
+        "Do you want to know where we are LOCATED, {name}?",
+        "Would you like to know more about the TECHNOLOGIES we use for your particular {capture_project_type}?"
       ]
     },
     {
@@ -149,9 +167,9 @@
         "Whether you need a rebrand, a new website, or a custom app, we can help."
       ],
       "followups": [
-        "Are you wanting to see more of our PORTFOLIO?",
-        "Do you want to find out how you can go about BOOKING with us?",
-        "Do you want to know where we are LOCATED?",
+        "Are you wanting to see more of our PORTFOLIO and if we do anything for your {capture_project_type}?",
+        "Do you want to find out how you can go about BOOKING and PRICING for your {capture_project_type}?",
+        "Do you want to know where we are LOCATED and if we are close to {capture_location}?",
         "Would you like to know more about the TECHNOLOGIES we use?"
       ]
     },
@@ -177,7 +195,7 @@
       ],
       "followups": [
         "Do you want to find out how you can go about BOOKING with us?",
-        "Do you want to know about our LOCATION?",
+        "Do you want to know about our LOCATION and if we are close to {capture_location}?",
         "Are you interested in the TECHNOLOGIES we use here?",
         "Want to find out more about our SERVICES?"
       ]
@@ -200,8 +218,8 @@
         "We provide competitive and flexible pricing options to suit your goals and budget."
       ],
       "followups": [
-        "Do you want to find out how you can go about BOOKING with us?",
-        "Do you want to know about our LOCATION?",
+        "Do you want to find out how you can go about BOOKING with us, {name}?",
+        "Do you want to know about our LOCATION and if we are close to {capture_location}?",
         "Would you like to get in CONTACT with someone?"
       ]
     },
@@ -223,9 +241,9 @@
         "We're just a message away — check out our contact options on the Contact page."
       ],
       "followups": [
-        "Have a look at some of our most FREQUENTLY ASKED QUESTIONS",
-        "See where we are LOCATED!",
-        "Interested in BOOKING? Find out more."
+        "Have a look at some of our most FREQUENTLY ASKED QUESTIONS, {name}",
+        "See where we are LOCATED! I think we're close to {capture_location}",
+        "Interested in BOOKING {name}? Find out more."
       ]
     },
     {
@@ -246,7 +264,7 @@
       ],
       "followups": [
         "Do you want to find out how you can go about BOOKING with us?",
-        "Do you want to know more about the TECHNOLOGIES we use?",
+        "Do you want to know more about the TECHNOLOGIES we use? We could probably work with {capture_technology} for your project.",
         "Would you like to get in CONTACT with someone?"
       ]
     },
@@ -272,7 +290,7 @@
       "followups": [
         "Have a look at some of our most FREQUENTLY ASKED QUESTIONS",
         "Do you want to find out more about how you can NAVIGATE our site.",
-        "Do you want to know more about the TECHNOLOGIES we use?",
+        "Do you want to know more about the TECHNOLOGIES we use?  We could probably work with {capture_technology} for your project.",
         "Would you like to get in CONTACT with someone?"
       ]
     },
@@ -288,10 +306,15 @@
         "What frameworks do you use?"
       ],
       "responses": [
-        "We use modern technologies including React, Next.js, Node.js, Figma, and more depending on your needs.",
+        "We use modern technologies including React, Next.js, Node.js, Figma, and more depending on your needs.  But we could probably work with {capture_technology} for your project.",
         "Our stack includes technologies like React, TypeScript, Node.js, and tools like Figma and GitHub.",
         "Yes! We use tools such as React, Next.js, Tailwind, Express, and design tools like Figma and Adobe XD.",
         "It depends on the project, but we work with a full modern development and design stack."
+      ],
+      "followups": [
+        "Have a look at some of our most FREQUENTLY ASKED QUESTIONS, {name}",
+        "See where we are LOCATED! I think we're close to {capture_location}",
+        "Interested in BOOKING {name}? Find out more."
       ]
     },
     {
@@ -312,6 +335,11 @@
         "We also offer complete rebranding and refresh services.",
         "Post-launch, we provide maintenance, updates, and support based on your needs.",
         "We’re happy to redesign or improve existing websites too."
+      ],
+      "followups": [
+        "Have a look at some of our most FREQUENTLY ASKED QUESTIONS, {name}",
+        "See where we are LOCATED! I think we're close to {capture_location}",
+        "Interested in BOOKING {name}? Find out more."
       ]
     },
     {
@@ -330,16 +358,26 @@
         "You can find everything you need in the site menu — just click on the section you're looking for.",
         "Feel free to explore using the navigation bar or go to the footer for quick links.",
         "All our sections are linked in the main navigation — look for Services, Work, Contact, or Pricing there."
+      ],
+      "followups": [
+        "Have a look at some of our most FREQUENTLY ASKED QUESTIONS, {name}",
+        "See where we are LOCATED! I think we're close to {capture_location}",
+        "Interested in BOOKING {name}? Find out more."
       ]
     },
     {
       "tag": "goodbye",
       "patterns": ["Bye", "Goodbye", "See you later", "Talk soon", "Thanks!", "Catch you later", "Take care"],
       "responses": [
-        "Thanks for visiting! Let us know if you need anything else.",
-        "It was great chatting with you — come back anytime!",
-        "Goodbye! Wishing you all the best with your project.",
+        "Thanks for visiting! Let us know if you need anything else {name}.",
+        "It was great chatting with you {name} — come back anytime!",
+        "Goodbye! Wishing you all the best with your {project_type}.",
         "Thanks! Feel free to reach out again if you need help."
+      ],
+      "followups": [
+        "Have a look at some of our most FREQUENTLY ASKED QUESTIONS, {name}",
+        "See where we are LOCATED! I think we're close to {capture_location}",
+        "Interested in BOOKING {name}? Find out more."
       ]
     },
     {

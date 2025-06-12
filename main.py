@@ -223,19 +223,25 @@ class Chatbot:
         if tag in self.responses:
             response = random.choice(self.responses[tag])
 
-            # Substitute placeholders in response
-            response = response.replace("{name}", self.memory.get("name", "friend"))
-            # response = response.replace("{color}", self.memory.get("color", "color"))
 
-            # Adding a follow up to the response
-            # based on the tag
+            # FOLLOW UP RESPONSES
+            # Adding a follow up to the response based on the tag
             # access self.int2followupres
             # get a random response and append to already had response
             if tag in self.followupresponses:
-                no_of_responses = len(self.followupresponses[tag])
+                # print(self.followupresponses[tag])
+                no_of_responses = int(len(self.followupresponses[tag]))
                 x = random.randint(0, no_of_responses-1)
                 follow_up = self.followupresponses[tag][x]
                 response += f"\nChatbot: {follow_up}"
+            
+            # Substitute placeholders in response
+            response = response.replace("{name}", self.memory.get("name", "friend"))
+            response = response.replace("{capture_project_type}", self.memory.get("project_type","project"))
+            response = response.replace("{capture_location}", self.memory.get("location","you"))
+            response = response.replace("{capture_technology}", self.memory.get("technology","different technologies"))
+
+
            
             if nouns:
                 response += f" I noticed you mentioned: {', '.join(nouns)}."
@@ -262,8 +268,3 @@ class Chatbot:
 
 bot = Chatbot()
 bot.chat_loop()
-
-# FOLLOW UP INTENTS EXAMPLE
-# if tag/intent is portfolio
-# pick randomly from follow-ups
-# add to response
