@@ -232,8 +232,8 @@ class Chatbot:
             # access self.int2followupres
             # get a random response and append to already had response
             if tag in self.followupresponses:
-                x = len(self.followupresponses[tag])
-                x = random.randint(0, x-1)
+                no_of_responses = len(self.followupresponses[tag])
+                x = random.randint(0, no_of_responses-1)
                 follow_up = self.followupresponses[tag][x]
                 response += f"\nChatbot: {follow_up}"
            

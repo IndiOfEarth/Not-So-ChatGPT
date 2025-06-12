@@ -105,8 +105,6 @@
     {
       "tag": "about_site",
       "patterns": [
-        "What is this site about?",
-        "What do you do here?",
         "Tell me about your site",
         "What's your purpose?",
         "What is Ember Designs?",
