@@ -338,8 +338,9 @@
       ],
       "followups": [
         "Have a look at some of our most FREQUENTLY ASKED QUESTIONS, {name}",
-        "See where we are LOCATED! I think we're close to {capture_location}",
-        "Interested in BOOKING {name}? Find out more."
+        "Do you want to find out more about how you can NAVIGATE our site.",
+        "Do you want to know more about the TECHNOLOGIES we use?  We could probably work with {capture_technology} for your project.",
+        "Would you like to get in CONTACT with someone?"
       ]
     },
     {
@@ -376,8 +377,9 @@
       ],
       "followups": [
         "Have a look at some of our most FREQUENTLY ASKED QUESTIONS, {name}",
-        "See where we are LOCATED! I think we're close to {capture_location}",
-        "Interested in BOOKING {name}? Find out more."
+        "Do you want to find out more about how you can NAVIGATE our site.",
+        "Do you want to know more about the TECHNOLOGIES we use?  We could probably work with {capture_technology} for your project.",
+        "Would you like to get in CONTACT with someone?"
       ]
     },
     {
@@ -388,6 +390,12 @@
         "Sorry, I didn’t catch that — could you ask in a different way?",
         "I’m here to help with questions about our work, services, or website. Could you clarify?",
         "Hmm, I’m not quite sure what you mean. Try asking about our work, services, or booking a consultation."
+      ],
+      "followups": [
+        "Have a look at some of our most FREQUENTLY ASKED QUESTIONS, {name}",
+        "Do you want to find out more about how you can NAVIGATE our site.",
+        "Do you want to know more about the TECHNOLOGIES we use?  We could probably work with {capture_technology} for your project.",
+        "Would you like to get in CONTACT with someone?"
       ]
     }
   ]

@@ -8,7 +8,6 @@ import string
 import math
 from nltk.corpus import stopwords, wordnet
 from nltk.stem import PorterStemmer, WordNetLemmatizer
-chat_memory = []
 
 # Handles loading and organising data from the intents.json file
 class IntentLoader:
